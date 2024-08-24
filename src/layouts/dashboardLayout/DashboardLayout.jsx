@@ -15,9 +15,8 @@ const DashboardLayout = () => {
       navigate('/sign-in')
     }
   }, [userId, isLoaded, navigate]);
-  
+
   if (!isLoaded) return "loading...";
-  
 
   return (
     <div className="dashboardLayout">
