@@ -1,0 +1,45 @@
+.homepage {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  .left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+
+    h1{
+      font-size: 64px;
+      background: linear-gradient(to right, #217bfe, #e55571);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    h3{
+      font-weight: 400;
+      max-width: 80%;
+    }
+    a{
+      padding: 15px 25px;
+      color: white;
+      background-color: #217bfe;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    a:hover{
+      color: #217bfe;
+      background-color: white;
+    }
+  }
+  .right{
+    flex: 1;
+  }
+
+}
