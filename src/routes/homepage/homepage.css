@@ -70,7 +70,6 @@
           height: 100%;
           background-size: auto 100%;
           animation: slideBg 12s ease-in-out infinite alternate;
-
         }
       }
 
@@ -84,6 +83,8 @@
   }
 
   .orbital {
+    height: 100%;
+    object-fit: contain;
     position: absolute;
     top: 0;
     left: 0;
