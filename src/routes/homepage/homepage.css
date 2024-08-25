@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   gap: 100px;
+  overflow-y: hidden;
 
   .left{
     flex: 1;
@@ -86,22 +87,12 @@
     height: 100%;
     object-fit: contain;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     opacity: 0.05;
-    animation: rotateOrbital 100s linear infinite;
     z-index: -1;
   }
 
-}
-
-@keyframes rotateOrbital {
-  0%{
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(60deg);
-  }
 }
 
 @keyframes botAnimation {
