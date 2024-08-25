@@ -53,6 +53,14 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      <div className="terms">
+        <img src="/logo.png" alt="logo image" />
+        <div className="links">
+          <Link to="#">Terms of service</Link>
+          <div>|</div>
+          <Link to="#">Privacy policy</Link>
+        </div>
+      </div>
     </div>
   )
 }
