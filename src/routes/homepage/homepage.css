@@ -80,6 +80,25 @@
         object-fit: contain;
         animation: botAnimation 3s ease-in-out infinite alternate;
       }
+
+      .chat {
+        display: flex;
+        position: absolute;
+        bottom: -30px;
+        right: -40px;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        background-color: #2c2937;
+        border-radius: 10px;
+
+        img  {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
     }
   }
 

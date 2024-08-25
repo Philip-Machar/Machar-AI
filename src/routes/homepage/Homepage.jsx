@@ -1,7 +1,11 @@
 import './homepage.css';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TypeAnimation } from 'react-type-animation';
 
 const Homepage = () => {
+  const [typingStatus, setTypingStatus] = useState("human1");
+
   return (
     <div className='homepage'>
       <img className="orbital" src="/orbital.png" alt="orbital image" />
@@ -19,6 +23,34 @@ const Homepage = () => {
             <div className="bg"></div>
           </div>
           <img className="bot" src="/bot.png" alt="bot image" />
+          <div className="chat">
+            <img src={typingStatus === "human1" ? "/human1.jpeg" : typingStatus === "human2" ? "/human2.jpeg" : "/bot.png"} />
+            <TypeAnimation
+              sequence={[
+                // Same substring at the start will only be typed out once, initially
+                'Human: We produce food for Mice',
+                2000, () => {
+                  setTypingStatus("human1");
+                },
+                'Bot: produce food for Hamsters',
+                2000, () => {
+                  setTypingStatus("bot");
+                },
+                'Human: produce food for Guinea',
+                2000, () => {
+                  setTypingStatus("human2");
+                },
+                'Bot: produce food for Chinchillas',
+                2000, () => {
+                  setTypingStatus("bot");
+                },
+              ]}
+              wrapper="span"
+              repeat={Infinity}
+              cursor={true}
+              omitDeletionAnimation={true}
+            />
+          </div>
         </div>
       </div>
     </div>
