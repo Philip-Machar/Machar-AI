@@ -28,7 +28,7 @@ const Homepage = () => {
             <TypeAnimation
               sequence={[
                 // Same substring at the start will only be typed out once, initially
-                'Human: We produce food for Mice',
+                'Human: We produce food for',
                 2000, () => {
                   setTypingStatus("human1");
                 },
@@ -40,7 +40,7 @@ const Homepage = () => {
                 2000, () => {
                   setTypingStatus("human2");
                 },
-                'Bot: produce food for Chinchillas',
+                'Bot: produce food for Chin',
                 2000, () => {
                   setTypingStatus("bot");
                 },
