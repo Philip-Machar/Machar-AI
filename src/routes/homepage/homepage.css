@@ -166,7 +166,7 @@
 
     @media screen and (max-width: 481px){
       position: absolute;
-      bottom: -172px;
+      bottom: -150px;
       left: 50%;
       transform: translateX(-50%);
     }
