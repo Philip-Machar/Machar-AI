@@ -4,6 +4,8 @@ import './rootLayout.css';
 import { ClerkProvider } from '@clerk/clerk-react'
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 
+import logo from '../../../public/logo.png';
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
@@ -16,7 +18,7 @@ const RootLayout = () => {
       <div className="rootLayout">
         <header>
           <Link to='/' className="logo">
-            <img src="/logo.png" />
+            <img src={logo} />
             <span>Machar AI</span>
           </Link>
           <div className="user">

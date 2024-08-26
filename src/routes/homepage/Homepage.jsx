@@ -3,12 +3,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 
+import orbital from '../../../public/orbital.png';
+import bot from '../../../public/bot.png';
+import logo from '../../../public/logo.png';
+import human1 from '../../../public/human1.jpeg';
+import human2 from '../../../public/human2.jpeg';
+
 const Homepage = () => {
   const [typingStatus, setTypingStatus] = useState("human1");
 
   return (
     <div className='homepage'>
-      <img className="orbital" src="orbital.png" alt="orbital image" />
+      <img className="orbital" src={orbital} alt="orbital image" />
       <div className="left">
         <h1>MACHAR AI</h1>
         <h2>Super charge your creativity and productivity</h2>
@@ -22,9 +28,9 @@ const Homepage = () => {
           <div className="bg-container">
             <div className="bg"></div>
           </div>
-          <img className="bot" src="/bot.png" alt="bot image" />
+          <img className="bot" src={bot} alt="bot image" />
           <div className="chat">
-            <img src={typingStatus === "human1" ? "/human1.jpeg" : typingStatus === "human2" ? "/human2.jpeg" : "/bot.png"} />
+            <img src={typingStatus === "human1" ? human1 : typingStatus === "human2" ? human2 : bot} />
             <TypeAnimation
               sequence={[
                 // Same substring at the start will only be typed out once, initially
@@ -54,7 +60,7 @@ const Homepage = () => {
         </div>
       </div>
       <div className="terms">
-        <img src="/logo.png" alt="logo image" />
+        <img src={logo} alt="logo image" />
         <div className="links">
           <Link to="#">Terms of service</Link>
           <div>|</div>
