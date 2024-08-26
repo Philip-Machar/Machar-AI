@@ -25,7 +25,8 @@ const App = () => {
           <Route path='/dashboard/chats/:id' element={<ChatPage />}/>
         </Route>
       </Route>
-    )
+    ),
+    { basename: '/Machar-AI' } 
   )
 
   return (

@@ -8,7 +8,7 @@ const Homepage = () => {
 
   return (
     <div className='homepage'>
-      <img className="orbital" src="/orbital.png" alt="orbital image" />
+      <img className="orbital" src="orbital.png" alt="orbital image" />
       <div className="left">
         <h1>MACHAR AI</h1>
         <h2>Super charge your creativity and productivity</h2>
