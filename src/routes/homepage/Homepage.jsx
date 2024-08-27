@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 
-import orbital from '../../../public/orbital.png';
-import bot from '../../../public/bot.png';
-import logo from '../../../public/logo.png';
-import human1 from '../../../public/human1.jpeg';
-import human2 from '../../../public/human2.jpeg';
+const orbital = `${import.meta.env.BASE_URL}orbital.png`;
+const bot = `${import.meta.env.BASE_URL}bot.png`;
+const logo = `${import.meta.env.BASE_URL}logo.png`;
+const human1 = `${import.meta.env.BASE_URL}human1.jpeg`;
+const human2 = `${import.meta.env.BASE_URL}human2.jpeg`;
 
 const Homepage = () => {
   const [typingStatus, setTypingStatus] = useState("human1");

@@ -4,7 +4,7 @@ import './rootLayout.css';
 import { ClerkProvider } from '@clerk/clerk-react'
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 
-import logo from '../../../public/logo.png';
+const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
