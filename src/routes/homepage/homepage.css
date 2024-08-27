@@ -1,12 +1,13 @@
 .homepage {
-  height: 80%;
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 100px;
 
   @media screen and (max-width: 481px){
     flex-direction: column;
-    gap: 0;
+    padding-block: 24px;
+    gap: 48px;
   }
 
   .left{
@@ -165,7 +166,7 @@
 
     @media screen and (max-width: 481px){
       position: absolute;
-      bottom: 0px;
+      bottom: -150px;
       left: 50%;
       transform: translateX(-50%);
       margin-bottom: 24px;
