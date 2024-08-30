@@ -1,6 +1,7 @@
 .chatList {
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   a {
     padding: 5px;
@@ -28,6 +29,7 @@
   .list {
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
     a {
       padding: 7px 10px;

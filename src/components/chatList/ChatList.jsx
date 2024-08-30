@@ -20,6 +20,13 @@ const ChatList = () => {
         <Link to="/">My chat title</Link>
         <Link to="/">My chat title</Link>
         <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
+        <Link to="/">My chat title</Link>
       </div>
       <hr />
       <div className="upgrade">
