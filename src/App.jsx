@@ -1,8 +1,7 @@
 import {
+  HashRouter as Router,
   Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
+  Routes,
 } from 'react-router-dom';
 
 import RootLayout from './layouts/rootLayout/RootLayout';
@@ -14,24 +13,21 @@ import SignInPage from './routes/signInPage/SignInPage';
 import SignUpPage from './routes/signUpPage/SignUpPage';
 
 const App = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/' element={<RootLayout />}>
-        <Route index element={<Homepage />}/>
-        <Route path='/sign-in/*' element={<SignInPage />}/>
-        <Route path='/sign-up/*' element={<SignUpPage />}/>
-        <Route element={<DashboardLayout />}>
-          <Route path='/dashboard' element={<DashboardPage />}/>
-          <Route path='/dashboard/chats/:id' element={<ChatPage />}/>
-        </Route>
-      </Route>
-    ),
-    { basename: '/Machar-AI' } 
-  )
-
   return (
-    <RouterProvider router={router} />
-  )
-}
+    <Router basename='/Machar-AI'>
+      <Routes>
+        <Route path='/' element={<RootLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path='/sign-in/*' element={<SignInPage />} />
+          <Route path='/sign-up/*' element={<SignUpPage />} />
+          <Route element={<DashboardLayout />}>
+            <Route path='/dashboard' element={<DashboardPage />} />
+            <Route path='/dashboard/chats/:id' element={<ChatPage />} />
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
