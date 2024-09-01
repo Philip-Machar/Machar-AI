@@ -20,13 +20,14 @@ const authenticator =  async () => {
     }
 };
 
-const Upload = () => {
+const Upload = ({ setImg }) => {
   const onError = err => {
     console.log("Error", err);
   };
   
   const onSuccess = res => {
     console.log("Success", res);
+    setImg((prev) => ({...prev, isLoading: false, dbData: res}))
   };
   
   const onUploadProgress = progress => {
@@ -35,6 +36,7 @@ const Upload = () => {
   
   const onUploadStart = evt => {
     console.log("Start", evt);
+    setImg((prev) => ({...prev, isLoading: true}))
   };
 
   return (
