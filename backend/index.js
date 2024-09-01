@@ -1,7 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import ImageKit from 'imagekit';
 
 const app = express();
+
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+}));
 
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGE_KIT_ENDPOINT,

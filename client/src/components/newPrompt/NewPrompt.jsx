@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import './newPrompt.css';
 
+import Upload from '../upload/Upload';
+
 const attachment = `${import.meta.env.BASE_URL}attachment.png`;
 const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
@@ -15,9 +17,7 @@ const NewPrompt = () => {
     <>
       <div className="endChat" ref={endRef} />
       <form className="newForm">
-        <label htmlFor="file">
-          <img src={attachment} alt="attachment" />
-        </label>
+        <Upload />
         <input id="file" type="file" multiple={false} hidden/>
         <input type="text" placeholder="Ask me anything..." />
         <button>
