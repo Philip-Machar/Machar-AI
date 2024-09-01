@@ -5,7 +5,6 @@ import { IKImage } from 'imagekitio-react';
 
 import Upload from '../upload/Upload';
 
-const attachment = `${import.meta.env.BASE_URL}attachment.png`;
 const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
 const NewPrompt = () => {
@@ -22,10 +21,13 @@ const NewPrompt = () => {
 
   return (
     <>
+    {img.isLoading && <div>Loading...</div>}
     {img.dbData.filePath && (
       <IKImage 
         urlEndpoint = {import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
         path = {img.dbData.filePath}
+        width = "380"
+        transformation = {[{width: 300}]}
       />
     )}
       <div className="endChat" ref={endRef} />
