@@ -1,10 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import './newPrompt.css';
 import model from '../../lib/gemini';
-
 import { IKImage } from 'imagekitio-react';
-
 import Upload from '../upload/Upload';
+import Markdown from 'react-markdown';
 
 const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
@@ -20,12 +19,12 @@ const NewPrompt = () => {
 
   useEffect(() => {
     endRef.current.scrollIntoView({behavior: 'smooth'});
-  }, []);
+  }, [question, answer, img.dbData]);
 
   const add = async (text) => {
     setQuestion(text);
 
-    const result = await model.generateContent(question);
+    const result = await model.generateContent(text);
     
     setAswer(result.response.text());
   }
@@ -52,12 +51,12 @@ const NewPrompt = () => {
       )}
 
       {question && <div className="message user">{question}</div>}
-      {answer && <div className="message">{answer}</div>}
+      {answer && <div className="message"><Markdown>{answer}</Markdown></div>}
       <div className="endChat" ref={endRef} />
       <form className="newForm" onSubmit={handleSubmit}>
         <Upload setImg={setImg} />
         <input id="file" type="file" multiple={false} hidden/>
-        <input type="text" name="text" placeholder="Ask me anything..." />
+        <input type="text" name="text" placeholder="Ask me anything..." autoComplete="off"/>
         <button>
           <img src={arrow} alt="arrow" />
         </button>
