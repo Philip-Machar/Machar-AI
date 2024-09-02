@@ -15,8 +15,3 @@ const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_PUBLIC_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", safetySettings});
 
 export default model;
-
-/*const prompt = "Write a story about a magic backpack.";
-
-const result = await model.generateContent(prompt);
-console.log(result.response.text());*/

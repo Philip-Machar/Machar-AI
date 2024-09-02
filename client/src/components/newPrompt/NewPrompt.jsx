@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import './newPrompt.css';
+import model from '../../lib/gemini';
 
 import { IKImage } from 'imagekitio-react';
 
@@ -8,33 +9,55 @@ import Upload from '../upload/Upload';
 const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
 const NewPrompt = () => {
+  const [question, setQuestion] = useState("");
+  const [answer, setAswer] = useState("")
   const endRef = useRef();
   const [img, setImg] = useState({
     isLoading: false,
     error: '',
     dbData: {}
-  })
+  });
 
   useEffect(() => {
     endRef.current.scrollIntoView({behavior: 'smooth'});
   }, []);
 
+  const add = async (text) => {
+    setQuestion(text);
+
+    const result = await model.generateContent(question);
+    
+    setAswer(result.response.text());
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const text = e.target.text.value;
+    if (!text) return;
+
+    add(text);
+  }
+
   return (
     <>
-    {img.isLoading && <div>Loading...</div>}
-    {img.dbData.filePath && (
-      <IKImage 
-        urlEndpoint = {import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
-        path = {img.dbData.filePath}
-        width = "380"
-        transformation = {[{width: 300}]}
-      />
-    )}
+      {img.isLoading && <div>Loading...</div>}
+      {img.dbData.filePath && (
+        <IKImage 
+          urlEndpoint = {import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
+          path = {img.dbData.filePath}
+          width = "380"
+          transformation = {[{width: 300}]}
+        />
+      )}
+
+      {question && <div className="message user">{question}</div>}
+      {answer && <div className="message">{answer}</div>}
       <div className="endChat" ref={endRef} />
-      <form className="newForm">
+      <form className="newForm" onSubmit={handleSubmit}>
         <Upload setImg={setImg} />
         <input id="file" type="file" multiple={false} hidden/>
-        <input type="text" placeholder="Ask me anything..." />
+        <input type="text" name="text" placeholder="Ask me anything..." />
         <button>
           <img src={arrow} alt="arrow" />
         </button>
