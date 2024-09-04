@@ -14,7 +14,8 @@ const NewPrompt = () => {
   const [img, setImg] = useState({
     isLoading: false,
     error: '',
-    dbData: {}
+    dbData: {},
+    aiData:{}
   });
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const NewPrompt = () => {
   const add = async (text) => {
     setQuestion(text);
 
-    const result = await model.generateContent(text);
+    const result = await model.generateContent(Object.entries(img.aiData).length ? [img.aiData, text] : [text]);
     
     setAswer(result.response.text());
   }
