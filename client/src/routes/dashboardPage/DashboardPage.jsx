@@ -1,4 +1,6 @@
-import './dashboardPage.css'
+import './dashboardPage.css';
+import { useAuth } from '@clerk/clerk-react';
+
 const logo = `${import.meta.env.BASE_URL}logo.png`;
 const chat = `${import.meta.env.BASE_URL}chat.png`;
 const image = `${import.meta.env.BASE_URL}image.png`;
@@ -6,6 +8,8 @@ const code = `${import.meta.env.BASE_URL}code.png`;
 const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
 const DashboardPage = () => {
+
+  const { userId } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,7 +22,7 @@ const DashboardPage = () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({text})
+      body: JSON.stringify({ userId, text })
     });
   }
 
