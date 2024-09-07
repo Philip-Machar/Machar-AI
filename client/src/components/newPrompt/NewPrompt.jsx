@@ -10,7 +10,7 @@ const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
 const NewPrompt = ({ data }) => {
   const [question, setQuestion] = useState("");
-  const [answer, setAswer] = useState("")
+  const [answer, setAswer] = useState("");
 
   const [img, setImg] = useState({
     isLoading: false,
@@ -36,7 +36,7 @@ const NewPrompt = ({ data }) => {
   const formRef = useRef(null);
 
   useEffect(() => {
-    endRef.current.scrollIntoView({behavior: 'smooth'});
+    endRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [data, question, answer, img.dbData]);
 
   const queryClient = useQueryClient();
@@ -81,8 +81,8 @@ const NewPrompt = ({ data }) => {
 
     try {
       const result = await chat.sendMessageStream(Object.entries(img.aiData).length ? [img.aiData, text] : [text]);
-    
-      let accumulatedText = ""
+
+      let accumulatedText = "";
       for await (const chunk of result.stream) {
         const chunkText = chunk.text();
         accumulatedText += chunkText;
@@ -99,11 +99,11 @@ const NewPrompt = ({ data }) => {
       error: '',
       dbData: {},
       aiData:{}
-    })
+    });
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const text = e.target.text.value;
     if (!text) return;
@@ -127,15 +127,17 @@ const NewPrompt = ({ data }) => {
       {img.isLoading && <div>Loading...</div>}
       {img.dbData.filePath && (
         <IKImage 
-          urlEndpoint = {import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
-          path = {img.dbData.filePath}
-          width = "380"
-          transformation = {[{width: 300}]}
+          urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
+          path={img.dbData.filePath}
+          width="380"
+          transformation={[{width: 300}]}
         />
       )}
 
       {question && <div className="message user">{question}</div>}
-      {answer && <div className="message"><Markdown>{answer}</Markdown></div>}
+      {answer && !data?.history.some(message => message.parts[0].text === answer) && (
+        <div className="message"><Markdown>{answer}</Markdown></div>
+      )}
       <div className="endChat" ref={endRef} />
       <form className="newForm" onSubmit={handleSubmit} ref={formRef}>
         <Upload setImg={setImg} />
@@ -146,7 +148,7 @@ const NewPrompt = ({ data }) => {
         </button>
       </form>
     </>
-  )
+  );
 }
 
 export default NewPrompt;
