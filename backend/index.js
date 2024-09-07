@@ -4,7 +4,7 @@ import ImageKit from 'imagekit';
 import mongoose from 'mongoose';
 import Chat from "./models/chats.js";
 import UserChats from "./models/userChats.js";
-import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node'
+import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
 const app = express();
 
@@ -35,13 +35,13 @@ app.get('/api/upload', (req, res) => {
   res.send(result);
 });
 
-/*app.get('/api/test', ClerkExpressWithAuth(), (req, res) => {
+/*app.get('/api/test', ClerkExpressRequireAuth(), (req, res) => {
   const userId = req.auth.userId;
   console.log(userId)
   res.send('success');
 });*/
 
-app.post('/api/chats', ClerkExpressWithAuth(), async (req, res) => {
+app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res) => {
   const userId = req.auth.userId
   const { text } = req.body
   
@@ -90,6 +90,19 @@ app.post('/api/chats', ClerkExpressWithAuth(), async (req, res) => {
   }catch(err){
     console.log(err)
     res.status(500).send('error creating chat!')
+  }
+});
+
+app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
+  const userId = req.auth.userId;
+
+  try {
+    const userChats = await UserChats.find({ userId });
+
+    res.status(200).send(userChats[0].chats);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error fetching userchats!");
   }
 });
 
