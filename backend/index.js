@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename);
 
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: 'https://machar-ai.vercel.app',
   credentials: true
 }));
 
