@@ -15,9 +15,10 @@ const __dirname = path.dirname(__filename);
 
 
 app.use(cors({
-  origin: 'https://machar-ai-main.vercel.app',
+  origin: ['https://machar-ai.vercel.app', 'https://machar-ai-main.vercel.app'],
   credentials: true
 }));
+
 
 app.use(express.json())
 
