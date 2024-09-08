@@ -1,6 +1,7 @@
 import './homepage.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 
 const orbital = `${import.meta.env.BASE_URL}orbital.png`;
@@ -12,6 +13,17 @@ const human2 = `${import.meta.env.BASE_URL}human2.jpeg`;
 const Homepage = () => {
   const [typingStatus, setTypingStatus] = useState("human1");
 
+  const { isSignedIn } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (isSignedIn) {
+      navigate('/dashboard');
+    } else {
+      navigate('/sign-in');
+    }
+  };
+
   return (
     <div className='homepage'>
       <img className="orbital" src={orbital} alt="orbital image" />
@@ -21,7 +33,7 @@ const Homepage = () => {
         <h3>
           Machar AI boosts your creativity and productivity with its intelligent, quick, and reliable support.
         </h3>
-        <Link to="/dashboard">Get Started</Link>
+        <Link to="#" onClick={handleGetStarted}>Get Started</Link>
       </div>
       <div className="right">
         <div className="img-container">
