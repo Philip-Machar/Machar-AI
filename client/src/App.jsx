@@ -26,7 +26,6 @@ const App = () => {
         </Route>
       </Route>
     ),
-    { basename: '/Machar-AI' } 
   )
 
   return (
