@@ -28,7 +28,7 @@ const Homepage = () => {
     <div className='homepage'>
       <img className="orbital" src={orbital} alt="orbital image" />
       <div className="left">
-        <h1>MACHAR AI</h1>
+        <h1>MACHAR A</h1>
         <h2>Super charge your creativity and productivity</h2>
         <h3>
           Machar AI boosts your creativity and productivity with its intelligent, quick, and reliable support.
