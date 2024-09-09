@@ -10,8 +10,17 @@ const ChatList = () => {
     queryFn: () =>
       fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         credentials: "include",
-      }).then((res) => res.json()),
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      }),
+    onError: (err) => {
+      console.error("Fetch error:", err);
+    },
   });
+  
 
   return (
     <div className='chatList'>
