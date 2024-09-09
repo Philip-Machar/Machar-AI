@@ -9,11 +9,7 @@ const ChatList = () => {
     queryKey: ["userChats"],
     queryFn: () =>
       fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-        method: "GET",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }).then((res) => res.json()),
   });
 
