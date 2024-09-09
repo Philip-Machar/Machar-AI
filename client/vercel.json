@@ -1,8 +1,5 @@
 {
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/index.html"
-      }
-    ]
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://machar-ai-main.vercel.app/api/$1" }
+  ]
 }
