@@ -15,9 +15,10 @@ const __dirname = path.dirname(__filename);
 
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: '*', // Allow all origins
   credentials: true
 }));
+
 
 app.use(express.json())
 
