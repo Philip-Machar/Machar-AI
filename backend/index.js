@@ -14,23 +14,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-// List of allowed origins
-const allowedOrigins = [
-  'https://machar-ai-main.vercel.app',
-  'https://machar-ai.vercel.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true // Allow credentials to be sent with requests
+  origin: process.env.CLIENT_URL,
+  credentials: true
 }));
-
 
 app.use(express.json())
 
