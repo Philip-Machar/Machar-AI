@@ -13,11 +13,19 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const allowedOrigins = ['https://machar-ai.vercel.app', 'https://machar-ai-philip-machars-projects.vercel.app'];
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // Allows cookies and credentials
 }));
+
 
 app.use(express.json())
 
