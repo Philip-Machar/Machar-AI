@@ -7,7 +7,7 @@ const logo = `${import.meta.env.BASE_URL}logo.png`;
 const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
-    queryFn: () =>
+    queryFn: async () =>
       fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         credentials: "include",
       }).then((res) => res.json()),
