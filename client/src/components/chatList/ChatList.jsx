@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import './chatList.css';
 import { useQuery } from '@tanstack/react-query';
-import { getAuth } from '@clerk/clerk-sdk-browser'; // Import Clerk's method to get auth token
+import { useAuth } from '@clerk/clerk-react'; // Correct Clerk import
 
 const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const ChatList = () => {
+  const { getToken } = useAuth(); // useAuth hook from Clerk
+
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: async () => {
-      const auth = await getAuth();
-      const token = auth.getToken(); // Obtain the token
+      const token = await getToken(); // Obtain the token
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         headers: {
