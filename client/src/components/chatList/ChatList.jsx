@@ -1,28 +1,16 @@
 import { Link } from 'react-router-dom';
 import './chatList.css';
 import { useQuery } from '@tanstack/react-query';
-import { getAuth } from '@clerk/clerk-sdk-browser'; // Import Clerk's method to get auth token
 
 const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
-    queryFn: async () => {
-      const auth = await getAuth();
-      const token = auth.getToken(); // Obtain the token
-
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-        headers: {
-          'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
-        },
+    queryFn: () =>
+      fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         credentials: "include",
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    },
+      }).then((res) => res.json()),
   });
 
   return (
