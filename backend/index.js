@@ -8,8 +8,7 @@ import Chat from "./models/chats.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
-try {
-  const app = express();
+const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,8 +29,8 @@ const connect = async () => {
     console.log('Connected to MongoDB...');
   } catch(err) {
     console.error('MongoDB connection error:', err);
-    console.error('MongoDB connection string:', process.env.MONGO.replace(/:[^:]*@/, ':****@')); // Logs the connection string with password hidden
-    throw err; // Re-throw the error to be caught by the outer try-catch
+    // You might want to exit the process here if the DB connection fails
+    // process.exit(1);
   }
 }
 
@@ -185,7 +184,3 @@ app.listen(port, () => {
   connect();
   console.log(`Server running at port ${port}...`);
 });
-} catch (error) {
-  console.error("Unhandled error in express setup:", error);
-}
-
