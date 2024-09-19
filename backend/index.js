@@ -91,18 +91,21 @@ app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res, next) => {
 // Get user chats
 app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res, next) => {
   const userId = req.auth.userId;
+  console.log("Fetching chats for user:", userId);
 
   try {
     const userChats = await UserChats.find({ userId });
+    console.log("User chats found:", userChats.length);
 
     if (!userChats.length) {
+      console.log("No chats found for user:", userId);
       return res.status(404).send("No chats found for the user.");
     }
 
     res.status(200).send(userChats[0].chats);
   } catch (err) {
     console.error('Error fetching userchats:', err);
-    next(err); // Pass to the error handler
+    next(err);
   }
 });
 
