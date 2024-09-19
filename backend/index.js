@@ -8,7 +8,8 @@ import Chat from "./models/chats.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
-const app = express();
+try {
+  const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -184,3 +185,7 @@ app.listen(port, () => {
   connect();
   console.log(`Server running at port ${port}...`);
 });
+} catch (error) {
+  console.error("Unhandled error in express setup:", error);
+}
+
