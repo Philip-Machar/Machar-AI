@@ -90,13 +90,16 @@ app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res, next) => {
   }
 });
 
-// Get user chats
-app.get("/api/userchats", ClerkExpressRequireAuth({
-  onError: (error, req, res, next) => {
-    console.error("Clerk Authentication Error:", error);
-    res.status(401).json({ error: "Authentication failed" });
+//test code
+const clerkAuth = ClerkExpressRequireAuth({
+  onError: (err, req, res, next) => {
+    console.error('Clerk authentication error:', err);
+    res.status(401).json({ error: 'Authentication failed' });
   }
-}), async (req, res, next) => {
+});
+
+// Get user chats
+app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res, next) => {
   const userId = req.auth.userId;
   console.log("Fetching chats for user:", userId);
 
@@ -106,10 +109,10 @@ app.get("/api/userchats", ClerkExpressRequireAuth({
 
     if (!userChats.length) {
       console.log("No chats found for user:", userId);
-      return res.status(404).send("No chats found for the user.");
+      return res.status(404).json({ message: "No chats found for the user." });
     }
 
-    res.status(200).send(userChats[0].chats);
+    res.status(200).json(userChats[0].chats);
   } catch (err) {
     console.error('Error fetching userchats:', err);
     res.status(500).json({ message: "Internal server error", error: err.message });
@@ -178,9 +181,21 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));
 });
 
+//test code
+console.log('Environment variables loaded:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('MONGO:', process.env.MONGO ? 'Set' : 'Not set');
+console.log('CLIENT_URL:', process.env.CLIENT_URL);
+console.log('CLERK_API_KEY:', process.env.CLERK_API_KEY ? 'Set' : 'Not set');
+// Log other important environment variables
+
 // Start Server
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-  connect();
-  console.log(`Server running at port ${port}...`);
+  console.log(`Server starting...`);
+  connect().then(() => {
+    console.log(`Server running at port ${port}...`);
+  }).catch((err) => {
+    console.error('Failed to start server:', err);
+  });
 });
