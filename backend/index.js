@@ -112,7 +112,7 @@ app.get("/api/userchats", ClerkExpressRequireAuth({
     res.status(200).send(userChats[0].chats);
   } catch (err) {
     console.error('Error fetching userchats:', err);
-    next(err);
+    res.status(500).json({ message: "Internal server error", error: err.message });
   }
 });
 
