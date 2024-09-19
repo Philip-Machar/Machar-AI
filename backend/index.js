@@ -14,12 +14,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL, // Ensure this is set correctly in Vercel
-  credentials: true
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
+
+app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -180,14 +185,6 @@ app.use(express.static(path.join(__dirname, "../client")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client", "index.html"));
 });
-
-//test code
-console.log('Environment variables loaded:');
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('MONGO:', process.env.MONGO ? 'Set' : 'Not set');
-console.log('CLIENT_URL:', process.env.CLIENT_URL);
-console.log('CLERK_API_KEY:', process.env.CLERK_API_KEY ? 'Set' : 'Not set');
-// Log other important environment variables
 
 // Start Server
 const port = process.env.PORT || 8000;
