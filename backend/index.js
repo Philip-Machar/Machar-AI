@@ -97,14 +97,19 @@ app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res, next) => {
 
 //test code
 const clerkAuth = ClerkExpressRequireAuth({
-  onError: (err, req, res, next) => {
-    console.error('Clerk authentication error:', err);
-    res.status(401).json({ error: 'Authentication failed' });
+  onError: (error, req, res, next) => {
+    console.error('Clerk Authentication Error:', error);
+    console.error('Request Headers:', req.headers);
+    res.status(401).json({ error: 'Authentication failed', details: error.message });
   }
 });
 
 // Get user chats
-app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res, next) => {
+app.get("/api/userchats", (req, res, next) => {
+  console.log('Received request to /api/userchats');
+  console.log('Headers:', req.headers);
+  next();
+}, clerkAuth, async (req, res, next) => {
   const userId = req.auth.userId;
   console.log("Fetching chats for user:", userId);
 
