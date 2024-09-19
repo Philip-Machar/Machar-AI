@@ -30,8 +30,8 @@ const connect = async () => {
     console.log('Connected to MongoDB...');
   } catch(err) {
     console.error('MongoDB connection error:', err);
-    // You might want to exit the process here if the DB connection fails
-    // process.exit(1);
+    console.error('MongoDB connection string:', process.env.MONGO.replace(/:[^:]*@/, ':****@')); // Logs the connection string with password hidden
+    throw err; // Re-throw the error to be caught by the outer try-catch
   }
 }
 
