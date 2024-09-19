@@ -10,7 +10,7 @@ const arrow = `${import.meta.env.BASE_URL}arrow.png`;
 
 const NewPrompt = ({ data }) => {
   const [question, setQuestion] = useState("");
-  const [answer, setAswer] = useState("");
+  const [answer, setAnswer] = useState("");
 
   const [img, setImg] = useState({
     isLoading: false,
@@ -86,7 +86,7 @@ const NewPrompt = ({ data }) => {
       for await (const chunk of result.stream) {
         const chunkText = chunk.text();
         accumulatedText += chunkText;
-        setAswer(accumulatedText);
+        setAnswer(accumulatedText);
       }
 
       mutation.mutate();

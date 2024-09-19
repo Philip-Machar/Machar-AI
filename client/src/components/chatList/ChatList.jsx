@@ -1,18 +1,25 @@
 import { Link } from 'react-router-dom';
 import './chatList.css';
 import { useQuery } from '@tanstack/react-query';
+import { useAuth } from "@clerk/clerk-react";
 
 const logo = `${import.meta.env.BASE_URL}logo.png`;
 
 const ChatList = () => {
+  const { getToken } = useAuth();
+
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: async () => {
+      const token = await getToken();
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-        credentials: "include",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
       });
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error('Network response was not ok');
       }
       return response.json();
     },
