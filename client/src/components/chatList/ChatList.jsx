@@ -7,10 +7,18 @@ const logo = `${import.meta.env.BASE_URL}logo.png`;
 const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
+    queryFn: async () => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
         credentials: "include",
-      }).then((res) => res.json()),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    },
+    onError: (error) => {
+      console.error("Error fetching user chats:", error);
+    }
   });
 
   return (
