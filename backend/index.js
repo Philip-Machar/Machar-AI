@@ -24,11 +24,13 @@ app.use(express.json());
 
 // MongoDB Connection
 const connect = async () => {
-  try{
+  try {
     await mongoose.connect(process.env.MONGO);
     console.log('Connected to MongoDB...');
-  } catch(err){
+  } catch(err) {
     console.error('MongoDB connection error:', err);
+    // You might want to exit the process here if the DB connection fails
+    // process.exit(1);
   }
 }
 
@@ -89,7 +91,12 @@ app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res, next) => {
 });
 
 // Get user chats
-app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res, next) => {
+app.get("/api/userchats", ClerkExpressRequireAuth({
+  onError: (error, req, res, next) => {
+    console.error("Clerk Authentication Error:", error);
+    res.status(401).json({ error: "Authentication failed" });
+  }
+}), async (req, res, next) => {
   const userId = req.auth.userId;
   console.log("Fetching chats for user:", userId);
 
