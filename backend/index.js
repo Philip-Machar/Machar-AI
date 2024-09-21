@@ -163,7 +163,7 @@ app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res, next) => {
     res.status(200).send(updatedChat);
   } catch (err) {
     console.error('Error adding conversation:', err);
-    next(err); // Pass to the error handler
+    next(err);
   }
 });
 
