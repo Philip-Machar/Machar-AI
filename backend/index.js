@@ -86,7 +86,7 @@ app.post('/api/chats', ClerkExpressRequireAuth(), async (req, res, next) => {
 
   } catch(err){
     console.error('Error creating chat:', err);
-    next(err); // Pass to the error handler
+    next(err);
   }
 });
 
